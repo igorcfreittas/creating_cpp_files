@@ -2,7 +2,7 @@
 
 #ERROR->CODE 1: Missing .cpp file passed as argument $ 1
 #ERROR->CODE 2: File passed as $ 1 is not a .cpp
-#ERROR->CODE 3: The file already exists
+#WARNING->CODE 1: The file already exists
 
 FILE=$1
 SCRIPTPATH=$(pwd)
@@ -33,7 +33,7 @@ then
 else
 	if [ -e $FILE ]
 	then
-		read -p "ERROR CODE 3: The file already exists, do you want to overwrite it? (y/n): " CONDITION
+		read -p "WARNING CODE 1: The file already exists, do you want to overwrite it? (y/n): " CONDITION
 		if [ $CONDITION = "y" ]
 		then
 			rm $FILE
