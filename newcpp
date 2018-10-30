@@ -1,0 +1,48 @@
+#!/bin/bash
+
+#ERROR->CODE 1: Missing .cpp file passed as argument $ 1
+#ERROR->CODE 2: File passed as $ 1 is not a .cpp
+#ERROR-CODE 3: The file already exists
+
+FILE=$1
+SCRIPTPATH=$(pwd)
+IFS="." read -ra ADDR <<< "$FILE";
+EXT=${ADDR[1]}
+
+create_cpp() 
+{
+	touch $FILE
+	chmod 777 -R $FILE
+	echo "#include <iostream>" >> $FILE
+	echo "using namespace std;" >> $FILE #Optional namespace std
+	echo "" >> $FILE
+	echo "int main(int argc, const char *argv[])" >> $FILE
+	echo "{" >> $FILE
+	echo "" >> $FILE
+	echo "	return 0;" >> $FILE
+	echo "}" >> $FILE
+	echo "Created: $FILE on $SCRIPTPATH"
+}
+
+if [ -z $FILE ]
+then
+	echo "ERROR CODE 1: You need to pass an .cpp file as an argument"
+elif [ $EXT != "cpp" ]
+then
+	echo "ERROR CODE 2: The first file is not a .cpp file"
+else
+	if [ -e $FILE ]
+	then
+		read -p "ERROR CODE 3: The file already exists, do you want to overwrite it? (y/n): " CONDITION
+		if [ $CONDITION = "y" ]
+		then
+			rm $FILE
+			create_cpp
+		else
+			echo "Exit"
+		fi
+	else
+		create_cpp
+	fi
+fi
+
