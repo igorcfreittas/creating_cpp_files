@@ -2,7 +2,7 @@
 
 #ERROR->CODE 1: Missing .cpp file passed as argument $ 1
 #ERROR->CODE 2: File passed as $ 1 is not a .cpp
-#ERROR-CODE 3: The file already exists
+#ERROR->CODE 3: The file already exists
 
 FILE=$1
 SCRIPTPATH=$(pwd)
